@@ -78,6 +78,26 @@ app.get('/admin/:id/update',async(req,res)=>{
 })
 
 
+app.post('/admin/:id',async(req,res)=>{
+    const userId = req.params.id;
+    const money = req.body.money;
+  
+    try {
+      const user = await User.findById(userId);
+  
+      user.money = money;
+  
+      await user.save();
+  
+      res.redirect('/');
+    } catch (error) {
+      console.error('Error updating user:', error);
+      res.status(500).send('Error updating user');
+    }
+
+  
+})
+
 
 // done! we export it so we can start the site in start.js
 module.exports = app;
