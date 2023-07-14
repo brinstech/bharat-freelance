@@ -89,7 +89,8 @@ app.post('/admin/:id',async(req,res)=>{
   
       await user.save();
   
-      res.redirect('/');
+      const userss = await User.find();
+      res.render("admin",{users:userss});
     } catch (error) {
       console.error('Error updating user:', error);
       res.status(500).send('Error updating user');
